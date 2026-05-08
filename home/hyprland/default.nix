@@ -90,7 +90,7 @@ let
     ] text;
 
   mkDefaultHyprFile = file:
-    let relative = lib.removePrefix "${hyprDefaultDir}/" (toString file);
+    let relative = builtins.unsafeDiscardStringContext (lib.removePrefix "${hyprDefaultDir}/" (toString file));
     in {
       name = "hypr/default/${relative}";
       value.text = patchHyprConfig (builtins.readFile file);
