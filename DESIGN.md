@@ -22,7 +22,7 @@ A hybrid port of [basecamp/omarchy](https://github.com/basecamp/omarchy) v3.8.0 
 1. **Bit-for-bit Arch behavior.** We will not reimplement `pacman`, AUR, or limine-snapper-sync. NixOS has its own answers (generations, flake inputs, btrfs+impermanence) that are strictly better at what those tools do.
 2. **Mutating `/etc` and `/usr` from bash scripts at install time.** Anything that touches system files moves into the Nix module layer. This is the single biggest behavioral break from Omarchy.
 3. **Supporting non-flakes.** This is a flake. No `configuration.nix`-only path.
-4. **A "stable" release cadence matching Omarchy's.** We track Omarchy's `master` and pull theme/config updates as they land; system-level updates follow nixos-unstable or 24.11 (TBD, see §11).
+4. **A "stable" release cadence matching Omarchy's.** We track Omarchy's `master` and pull theme/config updates as they land; system-level updates follow nixos-unstable or 24.11 (TBD, see Section 11).
 
 ---
 
@@ -109,7 +109,7 @@ nixarchy/
 │   ├── mako/
 │   ├── shell/                   # bash, starship, tmux, zoxide, fzf
 │   ├── editors/                 # nvim default config (omarchy-nvim)
-│   └── theme.nix                # theme overlay logic, see §6
+│   └── theme.nix                # theme overlay logic, see Section 6
 │
 ├── pkgs/                        # custom derivations
 │   ├── default.nix              # overlay
@@ -198,7 +198,7 @@ nixarchy/
 }
 ```
 
-The `omarchy-upstream` flake input pinned to `basecamp/omarchy` lets us pull config files from upstream at build time without forking them. This is how we stay current with theme/config changes (see §11).
+The `omarchy-upstream` flake input pinned to `basecamp/omarchy` lets us pull config files from upstream at build time without forking them. This is how we stay current with theme/config changes (see Section 11).
 
 ---
 
@@ -237,13 +237,13 @@ A pass through every install stage in Omarchy and where it lands here.
 | `install/first-run/welcome.sh` | `installer/first-run/` | runs once after first boot |
 | `install/first-run/wifi.sh` | `installer/first-run/` | iwd/nmtui prompt |
 | `install/first-run/firewall.sh` | `modules/system/firewall.nix` | always on, declarative |
-| `bin/omarchy-*` (282 scripts) | `pkgs/omarchy-cli/` | see §7 |
+| `bin/omarchy-*` (282 scripts) | `pkgs/omarchy-cli/` | see Section 7 |
 | `migrations/*.sh` | `pkgs/omarchy-cli/migrations/` | only user-state migrations |
 | `config/**` | `home/**` | mostly verbatim |
-| `default/**` | exposed via `OMARCHY_PATH` env var pointing at the store | see §6 |
+| `default/**` | exposed via `OMARCHY_PATH` env var pointing at the store | see Section 6 |
 | `themes/**` | `themes/**` | verbatim, exposed via `OMARCHY_THEMES_PATH` |
 
-The big wins: ~25 install scripts disappear because Nix does that thing better. The big losses: `omarchy-pkg-add` semantics change (see §7).
+The big wins: ~25 install scripts disappear because Nix does that thing better. The big losses: `omarchy-pkg-add` semantics change (see Section 7).
 
 ---
 
@@ -524,7 +524,7 @@ To pull upstream changes: `nix flake update omarchy-upstream`.
 What we do **not** pull from upstream:
 - Install scripts (we have our own)
 - Migration scripts (we have our own scoped set)
-- The `bin/omarchy-pkg-*` scripts (overridden, see §7)
+- The `bin/omarchy-pkg-*` scripts (overridden, see Section 7)
 
 What we **do** patch on the way through:
 - Hardcoded `~/.local/share/omarchy/` paths get rewritten to the store path. Most scripts already use `$OMARCHY_PATH` so this is mostly already correct.
@@ -577,7 +577,7 @@ Honest accounting of regressions vs. real Omarchy:
 1. **`omarchy-pkg-add` doesn't install packages.** Workflow change for users.
 2. **First boot is slower.** Nix has to evaluate the flake; expect 30–60 seconds extra on first activation.
 3. **Disk usage is higher.** Nix store keeps old generations until you garbage-collect. Plan for ~10–20 GB more than Arch+snapper.
-4. **Some AUR packages may not exist on Nix.** Each one has to be packaged manually. Tracked in §14.
+4. **Some AUR packages may not exist on Nix.** Each one has to be packaged manually. Tracked in Section 14.
 5. **Limine boot menu prettiness is lost.** systemd-boot is functional but plain. (We can add a Plymouth-on-bootloader splash later.)
 6. **You can't `pacman -S` something to debug.** You can `nix-shell -p` for a temporary shell, but it's a different muscle memory.
 
@@ -632,7 +632,7 @@ Roughly 13 custom derivations to write. Each is a few hours of work; expect 1–
 | 3 | Theme system: 19 themes packaged, template engine, `omarchy-theme-set` works. | 1 weekend |
 | 4 | `omarchy` CLI: all 282 scripts wrapped, overrides for the package-ish ones. | 2 weekends |
 | 5 | Hardware modules: framework, asus-rog, apple-t2, surface, dell-xps. | 1 weekend |
-| 6 | Custom packages: 13 derivations from §14.B. | 2 weekends |
+| 6 | Custom packages: 13 derivations from Section 14.B. | 2 weekends |
 | 7 | Installer ISO: TUI installer, disko-based partitioning, first-run wizard. | 2 weekends |
 | 8 | Polish: docs, CI for flake checks, automated upstream-input updates, theme test renders. | 1 weekend |
 
@@ -664,4 +664,4 @@ In strict order:
 
 That gets us a bootable, ugly, but recognizably-Hyprland system inside one weekend. Phase 1 done. Then we layer up.
 
----*
+---
