@@ -4,6 +4,7 @@
     ./omarchy-theme
     ./phase2-blocked.nix
     ./shell.nix
+    ./waybar
   ];
 
   home.username = username;
