@@ -1,6 +1,7 @@
 { username ? "nixarchy", ... }: {
   imports = [
     ./hyprland
+    ./phase2-blocked.nix
     ./shell.nix
   ];
 
