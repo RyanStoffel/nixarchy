@@ -464,6 +464,23 @@
         "type": "github"
       }
     },
+    "omarchy-upstream": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1777938402,
+        "narHash": "sha256-/Lv5hTmfM2VwRvWO1cb5JhFWxxg/oZrU3CoDf1talc0=",
+        "owner": "basecamp",
+        "repo": "omarchy",
+        "rev": "a3aedb0c4d0127b4f3138b1264a5611aecaaa72e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "basecamp",
+        "ref": "master",
+        "repo": "omarchy",
+        "type": "github"
+      }
+    },
     "pre-commit-hooks": {
       "inputs": {
         "flake-compat": "flake-compat",
@@ -492,7 +509,8 @@
         "home-manager": "home-manager",
         "hyprland": "hyprland",
         "nixos-generators": "nixos-generators",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "omarchy-upstream": "omarchy-upstream"
       }
     },
     "systems": {

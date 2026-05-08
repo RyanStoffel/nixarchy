@@ -18,6 +18,11 @@
       url = "github:hyprwm/Hyprland";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    omarchy-upstream = {
+      url = "github:basecamp/omarchy/master";
+      flake = false;
+    };
   };
 
   outputs = inputs@{ self, nixpkgs, ... }:
