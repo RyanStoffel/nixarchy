@@ -1,5 +1,6 @@
 { username ? "nixarchy", ... }: {
   imports = [
+    ./auxiliary
     ./hyprland
     ./mako
     ./omarchy-theme
