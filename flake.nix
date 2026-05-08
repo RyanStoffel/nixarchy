@@ -9,13 +9,18 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nixos-generators = {
+      url = "github:nix-community/nixos-generators";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     hyprland = {
       url = "github:hyprwm/Hyprland";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = inputs@{ nixpkgs, ... }:
+  outputs = inputs@{ self, nixpkgs, ... }:
     let
       mkSystem = {
         system ? "x86_64-linux",
@@ -31,5 +36,14 @@
       homeManagerModules.default = ./home;
 
       nixosConfigurations.nixarchy = mkSystem { };
+
+      packages.x86_64-linux.iso = (nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = { inherit inputs self; };
+        modules = [
+          "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
+          ./installer/iso.nix
+        ];
+      }).config.system.build.isoImage;
     };
 }
