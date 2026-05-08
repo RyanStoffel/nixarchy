@@ -1,6 +1,7 @@
 { username ? "nixarchy", ... }: {
   imports = [
     ./hyprland
+    ./omarchy-theme
     ./phase2-blocked.nix
     ./shell.nix
   ];
