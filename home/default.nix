@@ -5,6 +5,7 @@
     ./omarchy-theme
     ./phase2-blocked.nix
     ./shell.nix
+    ./terminals
     ./walker
     ./waybar
   ];
