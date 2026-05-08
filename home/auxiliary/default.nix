@@ -25,7 +25,20 @@ in {
   home.packages = with pkgs; [
     btop
     fastfetch
+    swayosd
   ];
+
+  systemd.user.services.swayosd = {
+    Unit = {
+      Description = "SwayOSD server";
+      After = [ "graphical-session.target" ];
+      PartOf = [ "graphical-session.target" ];
+    };
+
+    Service.ExecStart = "${pkgs.swayosd}/bin/swayosd-server";
+
+    Install.WantedBy = [ "graphical-session.target" ];
+  };
 
   xdg.configFile = {
     "btop/btop.conf".text = builtins.readFile "${upstream}/config/btop/btop.conf";
@@ -35,5 +48,7 @@ in {
       Nixarchy
       3.1.0-phase2
     '';
+    "swayosd/config.toml".text = builtins.readFile "${upstream}/config/swayosd/config.toml";
+    "swayosd/style.css".text = builtins.readFile "${upstream}/config/swayosd/style.css";
   };
 }

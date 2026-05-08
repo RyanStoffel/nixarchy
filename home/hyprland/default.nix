@@ -76,6 +76,10 @@ let
         to = "alacritty -e nvim";
       }
       {
+        from = "omarchy-swayosd-client";
+        to = "swayosd-client";
+      }
+      {
         from = "omarchy-launch-or-focus ^signal$ \"signal-desktop\"";
         to = "signal-desktop";
       }
