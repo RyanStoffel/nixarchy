@@ -88,6 +88,18 @@ let
         to = "signal-desktop";
       }
       {
+        from = "    col.border_locked_active = -1\n    col.border_locked_inactive = -1";
+        to = "    col.border_locked_active = $activeBorderColor\n    col.border_locked_inactive = $inactiveBorderColor";
+      }
+      {
+        from = "    pseudotile = true # Master switch for pseudotiling. Enabling is bound to mainMod + P in the keybinds section below\n";
+        to = "";
+      }
+      {
+        from = "\n# Toggle config flags dynamically\nsource = ~/.local/state/omarchy/toggles/hypr/*.conf\n";
+        to = "\n# Toggle config flags dynamically (omitted on NixOS because empty globs error)\n";
+      }
+      {
         from = "omarchy-";
         to = "${blocked} omarchy-";
       }
