@@ -36,6 +36,10 @@ let
         to = "";
       }
       {
+        from = "exec-once = swayosd-server\n";
+        to = "";
+      }
+      {
         from = "xdg-terminal-exec --dir=\"$(omarchy-cmd-terminal-cwd)\"";
         to = "alacritty";
       }
