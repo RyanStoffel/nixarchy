@@ -9,6 +9,7 @@
     ./terminals
     ./walker
     ./waybar
+    ./webapps
   ];
 
   home.username = username;

@@ -1,4 +1,21 @@
-{ pkgs, ... }: {
+{ lib, pkgs, username ? "nixarchy", ... }: {
+  nixpkgs.config.allowUnfreePredicate = pkg:
+    builtins.elem (lib.getName pkg) [
+      "1password"
+      "claude-code"
+      "discord"
+      "spotify"
+      "steam"
+      "steam-original"
+      "steam-run"
+      "steam-unwrapped"
+      "vscode"
+    ];
+
+  virtualisation.docker.enable = true;
+  users.users.${username}.extraGroups = [ "docker" ];
+  programs.steam.enable = true;
+
   environment.systemPackages = with pkgs; [
     # Terminals and launchers
     alacritty
@@ -76,6 +93,7 @@
 
     # Applications
     chromium
+    discord
     evince
     file-roller
     firefox
@@ -88,14 +106,19 @@
     obs-studio
     pinta
     signal-desktop
+    spotify
     tesseract
+    _1password-gui
     xournalpp
 
     # Development
     cmake
+    claude-code
+    codex
     docker
     docker-compose
     gcc
+    gemini-cli
     gh
     git
     git-lfs
@@ -106,12 +129,15 @@
     lazygit
     neovim
     nodejs_22
+    opencode
     pkg-config
     python3
     rustup
     uv
+    vscode
+    zed-editor
 
     # TODO: Add Phase 3+ packages later: omarchy-nvim, omarchy CLI, custom AUR ports.
-    # TODO: Consider unfree apps only after explicit allowlisting: obsidian, spotify, typora, 1password-beta.
+    # TODO: Consider unfree apps only after explicit allowlisting: obsidian, typora.
   ];
 }
