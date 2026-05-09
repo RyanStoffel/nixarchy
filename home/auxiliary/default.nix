@@ -31,13 +31,16 @@ in {
   systemd.user.services.swayosd = {
     Unit = {
       Description = "SwayOSD server";
-      After = [ "graphical-session.target" ];
-      PartOf = [ "graphical-session.target" ];
+      After = [ "hyprland-session.target" ];
+      PartOf = [ "hyprland-session.target" ];
     };
 
-    Service.ExecStart = "${pkgs.swayosd}/bin/swayosd-server";
+    Service = {
+      ExecStart = "${pkgs.swayosd}/bin/swayosd-server";
+      Restart = "on-failure";
+    };
 
-    Install.WantedBy = [ "graphical-session.target" ];
+    Install.WantedBy = [ "hyprland-session.target" ];
   };
 
   xdg.configFile = {
