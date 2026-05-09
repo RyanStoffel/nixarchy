@@ -32,7 +32,7 @@ let
         to = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
       }
       {
-        from = "! omarchy-toggle-enabled waybar-off && ";
+        from = "exec-once = ! omarchy-toggle-enabled waybar-off && waybar\n";
         to = "";
       }
       {
