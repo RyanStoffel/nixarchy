@@ -77,7 +77,47 @@ let
       }
       {
         from = "omarchy-swayosd-client";
-        to = "swayosd-client";
+        to = "${pkgs.swayosd}/bin/swayosd-client";
+      }
+      {
+        from = "omarchy-audio-input-mute";
+        to = "${pkgs.swayosd}/bin/swayosd-client --input-volume mute-toggle";
+      }
+      {
+        from = "omarchy-brightness-display +5%";
+        to = "${pkgs.swayosd}/bin/swayosd-client --brightness +5";
+      }
+      {
+        from = "omarchy-brightness-display 5%-";
+        to = "${pkgs.swayosd}/bin/swayosd-client --brightness -5";
+      }
+      {
+        from = "omarchy-brightness-display 100%";
+        to = "${pkgs.swayosd}/bin/swayosd-client --brightness 100";
+      }
+      {
+        from = "omarchy-brightness-display 1%-";
+        to = "${pkgs.swayosd}/bin/swayosd-client --brightness -1";
+      }
+      {
+        from = "omarchy-brightness-display +1%";
+        to = "${pkgs.swayosd}/bin/swayosd-client --brightness +1";
+      }
+      {
+        from = "omarchy-brightness-display 1%";
+        to = "${pkgs.swayosd}/bin/swayosd-client --brightness 1";
+      }
+      {
+        from = "omarchy-brightness-keyboard up";
+        to = "${pkgs.brightnessctl}/bin/brightnessctl --class=leds --device='*::kbd_backlight' set +1";
+      }
+      {
+        from = "omarchy-brightness-keyboard down";
+        to = "${pkgs.brightnessctl}/bin/brightnessctl --class=leds --device='*::kbd_backlight' set 1-";
+      }
+      {
+        from = "omarchy-brightness-keyboard cycle";
+        to = "${pkgs.brightnessctl}/bin/brightnessctl --class=leds --device='*::kbd_backlight' set +1";
       }
       {
         from = "omarchy-launch-or-focus ^signal$ \"signal-desktop\"";

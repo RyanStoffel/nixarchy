@@ -13,5 +13,10 @@ in {
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
 
+  services.udev.packages = with pkgs; [
+    brightnessctl
+    swayosd
+  ];
+
   security.polkit.enable = true;
 }
