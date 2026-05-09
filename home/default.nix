@@ -1,7 +1,14 @@
 { username ? "nixarchy", ... }: {
   imports = [
+    ./auxiliary
     ./hyprland
+    ./mako
+    ./omarchy-theme
+    ./phase2-blocked.nix
     ./shell.nix
+    ./terminals
+    ./walker
+    ./waybar
   ];
 
   home.username = username;

@@ -6,7 +6,6 @@
     ghostty
     kitty
     rofi
-    wofi
 
     # Shell tools
     bashInteractive
@@ -112,7 +111,7 @@
     rustup
     uv
 
-    # TODO: Add Phase 3+ packages later: walker, omarchy-nvim, omarchy CLI, custom AUR ports.
+    # TODO: Add Phase 3+ packages later: omarchy-nvim, omarchy CLI, custom AUR ports.
     # TODO: Consider unfree apps only after explicit allowlisting: obsidian, spotify, typora, 1password-beta.
   ];
 }
