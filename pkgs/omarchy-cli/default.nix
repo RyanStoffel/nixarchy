@@ -38,6 +38,7 @@ stdenv.mkDerivation {
     mkdir -p $out/bin $out/share/omarchy
     cp -r bin/. $out/bin/
     cp -r applications config default migrations themes $out/share/omarchy/
+    install -m644 icon.png version $out/share/omarchy/
     chmod +x $out/bin/omarchy*
 
     for script in $out/bin/omarchy $out/bin/omarchy-*; do
