@@ -2,6 +2,8 @@
 let
   system = pkgs.stdenv.hostPlatform.system;
   upstream = inputs.omarchy-upstream;
+  cursorTheme = "Adwaita";
+  cursorSize = 24;
   hyprConfigDir = "${upstream}/config/hypr";
   hyprDefaultDir = "${upstream}/default/hypr";
   blocked = "nixarchy-phase2-blocked";
@@ -86,6 +88,20 @@ let
       {
         from = "omarchy-swayosd-client";
         to = "${pkgs.swayosd}/bin/swayosd-client";
+      }
+      {
+        from = ''
+          # Cursor size
+          env = XCURSOR_SIZE,24
+          env = HYPRCURSOR_SIZE,24
+        '';
+        to = ''
+          # Cursor theme
+          env = XCURSOR_THEME,${cursorTheme}
+          env = HYPRCURSOR_THEME,${cursorTheme}
+          env = XCURSOR_SIZE,${toString cursorSize}
+          env = HYPRCURSOR_SIZE,${toString cursorSize}
+        '';
       }
       {
         from = "omarchy-audio-input-mute";
@@ -280,6 +296,14 @@ in {
     signal-desktop
     walker
   ];
+
+  home.pointerCursor = {
+    package = pkgs.adwaita-icon-theme;
+    name = cursorTheme;
+    size = cursorSize;
+    gtk.enable = true;
+    x11.enable = true;
+  };
 
   wayland.windowManager.hyprland = {
     enable = true;
