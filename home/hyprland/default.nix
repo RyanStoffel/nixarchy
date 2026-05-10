@@ -6,7 +6,6 @@ let
   cursorSize = 24;
   hyprConfigDir = "${upstream}/config/hypr";
   hyprDefaultDir = "${upstream}/default/hypr";
-  blocked = "nixarchy-phase2-blocked";
   terminal = lib.getExe pkgs.alacritty;
   chromium = lib.getExe pkgs.chromium;
   chromiumApp = url: "${chromium} --new-window --app=${url}";
@@ -54,42 +53,6 @@ let
         to = "nautilus --new-window";
       }
       {
-        from = "omarchy-launch-walker -m symbols";
-        to = "walker --modules symbols";
-      }
-      {
-        from = "omarchy-launch-walker -m clipboard";
-        to = "walker --modules clipboard";
-      }
-      {
-        from = "omarchy-launch-walker";
-        to = "walker";
-      }
-      {
-        from = "omarchy-system-lock";
-        to = "hyprlock";
-      }
-      {
-        from = "omarchy-launch-screensaver";
-        to = "hyprlock";
-      }
-      {
-        from = "omarchy-launch-browser --private";
-        to = "${chromium} --incognito";
-      }
-      {
-        from = "omarchy-launch-browser";
-        to = chromium;
-      }
-      {
-        from = "omarchy-launch-editor";
-        to = "${terminal} -e nvim";
-      }
-      {
-        from = "omarchy-swayosd-client";
-        to = "${pkgs.swayosd}/bin/swayosd-client";
-      }
-      {
         from = ''
           # Cursor size
           env = XCURSOR_SIZE,24
@@ -109,54 +72,6 @@ let
           env = GDK_SCALE,2
         '';
         to = "";
-      }
-      {
-        from = "omarchy-audio-input-mute";
-        to = "${pkgs.swayosd}/bin/swayosd-client --input-volume mute-toggle";
-      }
-      {
-        from = "omarchy-brightness-display +5%";
-        to = "${pkgs.swayosd}/bin/swayosd-client --brightness +5";
-      }
-      {
-        from = "omarchy-brightness-display 5%-";
-        to = "${pkgs.swayosd}/bin/swayosd-client --brightness -5";
-      }
-      {
-        from = "omarchy-brightness-display 100%";
-        to = "${pkgs.swayosd}/bin/swayosd-client --brightness 100";
-      }
-      {
-        from = "omarchy-brightness-display 1%-";
-        to = "${pkgs.swayosd}/bin/swayosd-client --brightness -1";
-      }
-      {
-        from = "omarchy-brightness-display +1%";
-        to = "${pkgs.swayosd}/bin/swayosd-client --brightness +1";
-      }
-      {
-        from = "omarchy-brightness-display 1%";
-        to = "${pkgs.swayosd}/bin/swayosd-client --brightness 1";
-      }
-      {
-        from = "omarchy-brightness-keyboard up";
-        to = "${pkgs.brightnessctl}/bin/brightnessctl --class=leds --device='*::kbd_backlight' set +1";
-      }
-      {
-        from = "omarchy-brightness-keyboard down";
-        to = "${pkgs.brightnessctl}/bin/brightnessctl --class=leds --device='*::kbd_backlight' set 1-";
-      }
-      {
-        from = "omarchy-brightness-keyboard cycle";
-        to = "${pkgs.brightnessctl}/bin/brightnessctl --class=leds --device='*::kbd_backlight' set +1";
-      }
-      {
-        from = "omarchy-launch-or-focus ^signal$ \"signal-desktop\"";
-        to = "signal-desktop";
-      }
-      {
-        from = "omarchy-launch-or-focus ^signal$ \"uwsm-app -- signal-desktop\"";
-        to = "signal-desktop";
       }
       {
         from = "bindd = SUPER CTRL, C, Capture menu, exec, omarchy-menu capture";
@@ -264,10 +179,6 @@ let
       {
         from = "\n# Toggle config flags dynamically\nsource = ~/.local/state/omarchy/toggles/hypr/*.conf\n";
         to = "\n# Toggle config flags dynamically (omitted on NixOS because empty globs error)\n";
-      }
-      {
-        from = "omarchy-";
-        to = "${blocked} omarchy-";
       }
     ] text;
 

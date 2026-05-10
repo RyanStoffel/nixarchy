@@ -1,4 +1,11 @@
-{ lib, pkgs, username ? "nixarchy", ... }: {
+{ inputs, lib, pkgs, username ? "nixarchy", ... }:
+let
+  system = pkgs.stdenv.hostPlatform.system;
+  omarchy-cli = pkgs.callPackage ../../pkgs/omarchy-cli {
+    src = inputs.omarchy-upstream;
+    hyprland = inputs.hyprland.packages.${system}.hyprland;
+  };
+in {
   nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (lib.getName pkg) [
       "1password"
@@ -17,6 +24,9 @@
   programs.steam.enable = true;
 
   environment.systemPackages = with pkgs; [
+    # Omarchy
+    omarchy-cli
+
     # Terminals and launchers
     alacritty
     foot
@@ -137,7 +147,7 @@
     vscode
     zed-editor
 
-    # TODO: Add Phase 3+ packages later: omarchy-nvim, omarchy CLI, custom AUR ports.
+    # TODO: Add Phase 3+ packages later: omarchy-nvim, custom AUR ports.
     # TODO: Consider unfree apps only after explicit allowlisting: obsidian, typora.
   ];
 }

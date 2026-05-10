@@ -3,7 +3,6 @@ let
   upstream = inputs.omarchy-upstream;
   walkerConfigDir = "${upstream}/config/walker";
   walkerDefaultDir = "${upstream}/default/walker";
-  blocked = "nixarchy-phase2-blocked";
 
   replaceMany = replacements: text:
     lib.foldl'
@@ -21,10 +20,6 @@ let
       {
         from = ''@import "../../../../../../../.config/omarchy/current/theme/walker.css";'';
         to = ''@import "../../../omarchy/current/theme/walker.css";'';
-      }
-      {
-        from = "omarchy-";
-        to = "${blocked} omarchy-";
       }
     ] text;
 

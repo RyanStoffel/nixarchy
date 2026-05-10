@@ -1,18 +1,11 @@
 { inputs, pkgs, ... }:
 let
   upstream = inputs.omarchy-upstream;
-  blocked = "nixarchy-phase2-blocked";
 
   patchMako = text:
     builtins.replaceStrings
-      [
-        "~/.local/share/omarchy/default"
-        "omarchy-"
-      ]
-      [
-        "~/.config/omarchy/default"
-        "${blocked} omarchy-"
-      ]
+      [ "~/.local/share/omarchy/default" ]
+      [ "~/.config/omarchy/default" ]
       text;
 in {
   home.packages = with pkgs; [ mako ];
