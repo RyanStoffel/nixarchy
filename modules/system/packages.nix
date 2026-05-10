@@ -26,6 +26,7 @@ in {
   environment.systemPackages = with pkgs; [
     # Omarchy
     omarchy-cli
+    elephant
 
     # Terminals and launchers
     alacritty
