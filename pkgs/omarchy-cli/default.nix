@@ -20,6 +20,7 @@
 , gnome-calculator
 , v4l-utils
 , glib
+, swayosd
 }:
 
 stdenv.mkDerivation {
@@ -63,6 +64,7 @@ stdenv.mkDerivation {
           gnome-calculator
           v4l-utils
           glib
+          swayosd
         ]}
     done
 

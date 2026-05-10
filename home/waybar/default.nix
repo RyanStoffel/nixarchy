@@ -2,7 +2,6 @@
 let
   upstream = inputs.omarchy-upstream;
   waybarDir = "${upstream}/config/waybar";
-  blocked = "nixarchy-phase2-blocked";
 
   replaceMany = replacements: text:
     lib.foldl'
@@ -34,10 +33,6 @@ let
       {
         from = "$OMARCHY_PATH";
         to = "${upstream}";
-      }
-      {
-        from = "omarchy-";
-        to = "${blocked} omarchy-";
       }
     ] text;
 in {
