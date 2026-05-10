@@ -21,6 +21,7 @@
 , v4l-utils
 , glib
 , swayosd
+, elephant
 }:
 
 stdenv.mkDerivation {
@@ -66,6 +67,7 @@ stdenv.mkDerivation {
           v4l-utils
           glib
           swayosd
+          elephant
         ]}
     done
 

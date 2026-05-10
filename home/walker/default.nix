@@ -30,7 +30,22 @@ let
       value.text = patchWalker (builtins.readFile file);
     };
 in {
-  home.packages = with pkgs; [ walker ];
+  home.packages = with pkgs; [ walker elephant ];
+
+  systemd.user.services.elephant = {
+    Unit = {
+      Description = "Elephant data provider (Walker backend)";
+      After = [ "hyprland-session.target" ];
+      PartOf = [ "hyprland-session.target" ];
+    };
+
+    Service = {
+      ExecStart = "${pkgs.elephant}/bin/elephant";
+      Restart = "on-failure";
+    };
+
+    Install.WantedBy = [ "hyprland-session.target" ];
+  };
 
   xdg.configFile =
     {
