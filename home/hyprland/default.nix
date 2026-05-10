@@ -104,6 +104,13 @@ let
         '';
       }
       {
+        from = ''
+          # Optimized for retina-class 2x displays, like 13" 2.8K, 27" 5K, 32" 6K.
+          env = GDK_SCALE,2
+        '';
+        to = "";
+      }
+      {
         from = "omarchy-audio-input-mute";
         to = "${pkgs.swayosd}/bin/swayosd-client --input-volume mute-toggle";
       }
