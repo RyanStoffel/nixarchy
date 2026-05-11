@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+# Nixarchy override: upstream-omarchy branch is a flake input ref.
+# omarchy:summary=Explain how to switch upstream-omarchy branch via flake input.
+
+cat >&2 <<EOF
+
+Nixarchy tracks upstream Omarchy via the omarchy-upstream flake input.
+
+To switch branches, edit flake.nix's omarchy-upstream.url:
+
+  github:basecamp/omarchy/master   (default)
+  github:basecamp/omarchy/rc
+  github:basecamp/omarchy/dev
+
+Then update and rebuild:
+
+  cd "\${NIXARCHY_FLAKE:-\$HOME/.config/nixarchy}"
+  nix flake update omarchy-upstream
+  sudo nixos-rebuild switch --flake .
+
+EOF
+exit 1

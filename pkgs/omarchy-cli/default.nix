@@ -33,6 +33,11 @@ stdenv.mkDerivation {
 
   dontBuild = true;
 
+  postPatch = ''
+    cp -f ${./overrides}/* bin/
+    chmod +x bin/omarchy-*
+  '';
+
   installPhase = ''
     runHook preInstall
 

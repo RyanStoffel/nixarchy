@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# Nixarchy override: channels are flake inputs, not pacman repos.
+# omarchy:summary=Explain how to switch nixpkgs channel via flake inputs.
+
+cat >&2 <<EOF
+
+Nixarchy uses flake inputs for channel selection, not pacman repos.
+
+To switch nixpkgs channel, edit flake.nix's nixpkgs.url:
+
+  github:nixos/nixpkgs/nixos-unstable   (edge / dev)
+  github:nixos/nixpkgs/nixos-25.05      (stable)
+
+Then update and rebuild:
+
+  cd "\${NIXARCHY_FLAKE:-\$HOME/.config/nixarchy}"
+  nix flake update nixpkgs
+  sudo nixos-rebuild switch --flake .
+
+EOF
+exit 1

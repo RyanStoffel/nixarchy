@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+# Nixarchy override: replace pacman update flow with nixos-rebuild.
+# omarchy:summary=Update flake inputs and rebuild the NixOS system.
+# omarchy:args=[-y]
+# omarchy:requires-sudo=true
+
+set -e
+
+flake="${NIXARCHY_FLAKE:-$HOME/.config/nixarchy}"
+
+if [[ ! -d $flake ]]; then
+  echo "Nixarchy flake not found at $flake" >&2
+  echo "Set \$NIXARCHY_FLAKE to your nixarchy checkout, or place it at $HOME/.config/nixarchy" >&2
+  exit 1
+fi
+
+confirm=true
+if [[ $1 == "-y" ]]; then confirm=false; fi
+
+if $confirm; then
+  printf '\e[32mUpdate Nixarchy\e[0m\n'
+  printf 'Flake: %s\n\n' "$flake"
+  read -rp "Continue with update? [y/N] " ans
+  case "$ans" in
+    y|Y|yes|YES) ;;
+    *) echo "Update cancelled"; exit 1 ;;
+  esac
+fi
+
+echo
+echo "Updating flake inputs..."
+nix flake update --flake "$flake"
+
+echo
+echo "Rebuilding system..."
+sudo nixos-rebuild switch --flake "$flake"
+
+echo
+echo "Update complete. Reboot if the kernel or initrd changed."

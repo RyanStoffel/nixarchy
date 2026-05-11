@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# Nixarchy override: delegate to omarchy-pkg-remove.
+exec omarchy-pkg-remove "$@"

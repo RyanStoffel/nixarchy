@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# Nixarchy override: package removal is declarative.
+# omarchy:summary=Print Nix-aware removal guidance.
+
+flake="${NIXARCHY_FLAKE:-$HOME/.config/nixarchy}"
+pkgs="${*:-<package>}"
+
+cat >&2 <<EOF
+
+Nixarchy doesn't remove packages imperatively.
+
+To remove $pkgs, delete it from environment.systemPackages
+in modules/system/packages.nix and run:
+
+  sudo nixos-rebuild switch --flake "$flake"
+
+EOF
+
+if command -v notify-send >/dev/null 2>&1; then
+  notify-send -u normal "Nixarchy" "Edit flake to remove $pkgs"
+fi
+
+exit 1

@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+# Nixarchy override: NixOS generations replace snapper snapshots.
+# omarchy:summary=List or roll back NixOS generations.
+# omarchy:args=<list|create|restore>
+
+command="${1:-list}"
+
+case "$command" in
+create)
+  cat <<EOF
+On Nixarchy, every successful 'nixos-rebuild switch' creates a generation.
+To force one now:
+
+  sudo nixos-rebuild switch --flake "\${NIXARCHY_FLAKE:-\$HOME/.config/nixarchy}"
+EOF
+  exit 0
+  ;;
+restore|rollback)
+  cat <<EOF
+To roll back to the previous generation:
+
+  sudo nixos-rebuild switch --rollback
+
+Or pick an older generation from the systemd-boot menu at boot.
+EOF
+  exit 0
+  ;;
+list)
+  exec sudo nix-env --profile /nix/var/nix/profiles/system --list-generations
+  ;;
+*)
+  echo "Usage: omarchy-snapshot <list|create|restore>" >&2
+  exit 1
+  ;;
+esac
