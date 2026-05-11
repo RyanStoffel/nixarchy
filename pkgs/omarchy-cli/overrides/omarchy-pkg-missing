@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# Nixarchy override: pacman not available; fall back to command -v.
+# omarchy:summary=Returns true (exit 0) if any of the named commands are missing.
+
+for pkg in "$@"; do
+  if ! command -v "$pkg" >/dev/null 2>&1; then
+    exit 0
+  fi
+done
+
+exit 1

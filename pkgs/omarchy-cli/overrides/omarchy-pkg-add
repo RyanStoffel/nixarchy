@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+# Nixarchy override: package installation is declarative.
+# omarchy:summary=Print Nix-aware install guidance (Nixarchy doesn't install packages imperatively).
+
+flake="${NIXARCHY_FLAKE:-$HOME/.config/nixarchy}"
+pkgs="${*:-<package>}"
+
+cat >&2 <<EOF
+
+Nixarchy doesn't install packages imperatively.
+
+To install $pkgs, edit environment.systemPackages in
+modules/system/packages.nix and run:
+
+  sudo nixos-rebuild switch --flake "$flake"
+
+Or for a one-shot user install:
+
+  nix profile install nixpkgs#<pkg>
+
+EOF
+
+if command -v notify-send >/dev/null 2>&1; then
+  notify-send -u normal "Nixarchy" "Edit flake to install $pkgs"
+fi
+
+exit 1

@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# Nixarchy override: AUR doesn't exist; delegate to omarchy-pkg-add for the message.
+exec omarchy-pkg-add "$@"

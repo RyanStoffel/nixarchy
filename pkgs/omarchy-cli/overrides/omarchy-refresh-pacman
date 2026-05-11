@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# Nixarchy override: pacman doesn't exist on NixOS.
+# omarchy:summary=No-op on Nixarchy; pacman doesn't exist.
+
+echo "Nixarchy: no pacman configuration to refresh." >&2
+exit 0

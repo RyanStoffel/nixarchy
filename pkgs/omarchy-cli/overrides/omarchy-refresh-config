@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# Nixarchy override: home-manager owns ~/.config/.
+# omarchy:summary=Explain that home-manager owns ~/.config; rebuild to regenerate.
+
+flake="${NIXARCHY_FLAKE:-$HOME/.config/nixarchy}"
+
+cat >&2 <<EOF
+
+Nixarchy manages ~/.config via home-manager.
+
+To regenerate config files from upstream defaults, rebuild:
+
+  sudo nixos-rebuild switch --flake "$flake"
+
+EOF
+exit 1
